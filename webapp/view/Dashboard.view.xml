@@ -1,0 +1,337 @@
+<mvc:View
+    controllerName="com.nhpc.zhrcomprptapprs1.controller.Dashboard"
+    height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
+>
+    <f:DynamicPage
+        id="idCompDynamicPage"
+        headerExpanded="true"
+    >
+        <f:header>
+            <f:DynamicPageHeader id="idCompDynamicPageHeader">
+                <f:content>
+                    <fb:FilterBar
+                        id="idCompFilterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search=".onDashboardFilterSearch"
+                        filterChange=".onFilterChange"
+                        afterVariantLoad=".onAfterVariantLoad"
+                        showClearOnFB="true"
+                        clear="onFilterClear"
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                id="idAprFltItm1"
+                                name="RequestNumber"
+                                label="{i18n>filterRequestNumberLabel}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="requestNumberInput"
+                                        value="{viewModel>/filterData/RequestNumber}"
+                                        change="onInputChange"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <!-- <fb:FilterGroupItem
+                                name="Report"
+                                label="{i18n>report}"
+                                groupName="Group2"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <ComboBox
+                                        selectedKey="{viewModel>/filterData/Report}"
+                                        change="onComboBoxChange"
+                                    >
+                                        <core:ListItem
+                                            key="COMPLIANCE"
+                                            text="{i18n>complianceReport}"
+                                        />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem> -->
+
+                            <fb:FilterGroupItem
+                                id="idAprFltItm2"
+                                name="Year"
+                                label="{i18n>selectPeriod}"
+                                groupName="Group2"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <!-- <ComboBox
+                                        selectedKey="{viewModel>/filterData/Year}"
+                                        items="{/YearVHSet}"
+                                        change="onComboBoxChange"
+                                    >
+                                        <core:Item
+                                            key="{Year}"
+                                            text="{Year}"
+                                        />
+                                       
+            
+                                    </ComboBox> -->
+                                    <DatePicker
+                                        id="idFinancialYearFilter"
+                                        value="{viewModel>/filterData/Year}"
+                                        displayFormat="yyyy"
+                                        valueFormat="yyyy"
+                                        change="onDateChange"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                id="idAprFltItm3"
+                                name="Quarter"
+                                label="{i18n>selectQuarter}"
+                                groupName="Group3"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <ComboBox
+                                        id="idAprFltItmCmbPrd"
+                                        selectedKey="{viewModel>/filterData/Quarter}"
+                                        items="{/PeriodVHSet}"
+                                        change="onComboBoxChange"
+                                    >
+                                        <core:Item
+                                            id="idAprFltItmCmbItmPrd"
+                                            key="{Period}"
+                                            text="{Description}"
+                                        />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                id="idStatus"
+                                name="Status"
+                                label="{i18n>filterStatusLabel}"
+                                groupName="Group4"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <ComboBox
+                                        id="idAprFltItmCmbSt"
+                                        width="100%"
+                                        selectedKey="{viewModel>/filterData/Status}"
+                                        change="onComboBoxChange"
+                                        items="{/StatusVHSet}"
+                                    >
+                                        <core:Item
+                                            id="idAprFltItmCmbItmSt"
+                                            key="{Status}"
+                                            text="{StatusDesc}"
+                                        />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <VBox id="idDashboardVbox">
+                <Table
+                    id="idDashboardTable"
+                    mode="None"
+                    sticky="ColumnHeaders,HeaderToolbar"
+                    items="{
+                    path: '/ApproveHeaderSet'
+                }"
+                    alternateRowColors="true"
+                    growing="true"
+                    growingThreshold="20"
+                    updateFinished="onManageTaskTableUpdateFinish"
+                >
+                    <headerToolbar>
+                        <OverflowToolbar id="idAprOvrTlbar">
+                            <Title
+                                id="idDashboardTitle"
+                                text="{i18n>compliancedashboardTitle}"
+                            />
+                            <ToolbarSpacer id="idAprTlbarSpcr" />
+                            <Button
+                                id="idBtnExport"
+                                type="Reject"
+                                text="{i18n>DownloadReport}"
+                                icon="sap-icon://excel-attachment"
+                                press="onExport"
+                            />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column id="idAprColHdr1">
+                            <Text
+                                id="idAprColHdrTxt1"
+                                text="{i18n>recordNo}"
+                            />
+                        </Column>
+                        <Column id="idAprColHdr2">
+                            <Text
+                                id="idAprColHdrTxt2"
+                                text="{i18n>location}"
+                            />
+                        </Column>
+                        <Column id="idAprColHdr3">
+                            <Text
+                                id="idAprColHdrTxt3"
+                                text="{i18n>division}"
+                            />
+                        </Column>
+                        <Column id="idAprColHdr4">
+                            <Text
+                                id="idAprColHdrTxt4"
+                                text="{i18n>year}"
+                            />
+                        </Column>
+                        <Column id="idAprColHdr5">
+                            <Text
+                                id="idAprColHdrTxt5"
+                                text="{i18n>period}"
+                            />
+                        </Column>
+                        <Column id="idAprColHdr6">
+                            <Text
+                                id="idAprColHdrTxt6"
+                                text="{i18n>from}"
+                            />
+                        </Column>
+                        <Column id="idAprColHdr7">
+                            <Text
+                                id="idAprColHdrTxt7"
+                                text="{i18n>to}"
+                            />
+                        </Column>
+
+                        <Column id="idAprColHdr8">
+                            <Text
+                                id="idAprColHdrTxt8"
+                                text="{i18n>createdBy}"
+                            />
+                        </Column>
+                        <Column id="idAprColHdr9">
+                            <Text
+                                id="idAprColHdrTxt9"
+                                text="{i18n>recommendedBy}"
+                            />
+                        </Column>
+                        <Column id="idAprColHdr10">
+                            <Text
+                                id="idAprColHdrTxt10"
+                                text="{i18n>approvedBy}"
+                            />
+                        </Column>
+                        <Column id="idAprColHdr11">
+                            <Text
+                                id="idAprColHdrTxt11"
+                                text="{i18n>authorizedBy}"
+                            />
+                        </Column>
+                        <Column id="idAprColHdr12">
+                            <Text
+                                id="idAprColHdrTxt12"
+                                text="{i18n>status}"
+                            />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem
+                            id="idClmLstItmApr"
+                            type="Navigation"
+                            press="handleOnItemPress"
+                        >
+                            <cells>
+                                <ObjectIdentifier
+                                    id="idAprCellValDash1"
+                                    title="{ReportId}"
+                                />
+
+                                <ObjectIdentifier
+                                    id="idAprCellValDash2"
+                                    title="{LocationId}"
+                                    text="{LocationDesc}"
+                                />
+
+                                <ObjectIdentifier
+                                    id="idAprCellValDash3"
+                                    title="{DivisionId}"
+                                    text="{DivisionDesc}"
+                                />
+
+                                <Text
+                                    id="idAprCellValDash4"
+                                    text="{Fyear}"
+                                />
+
+                                <Text
+                                    id="idAprCellValDash5"
+                                    text="{Period}"
+                                />
+
+                                <Text
+                                    id="idAprCellValDash6"
+                                    text="{
+                                        path:'DateFrom',
+                                        formatter: '.formatter.formatDate'
+                                    }"
+                                />
+
+                                <Text
+                                    id="idAprCellValDash7"
+                                    text="{
+                                    path:'DateTo',
+                                    formatter: '.formatter.formatDate'
+                                }"
+                                />
+
+                                <ObjectIdentifier id="idAprCellValDash8"
+                                    title="{CreatedBy}"
+                                    text="{CreatedByPernr}"
+                                />
+
+                                <ObjectIdentifier id="idAprCellValDash9"
+                                    title="{RecommendedBy}"
+                                    text="{RecommendedByPernr}"
+                                />
+
+                                <ObjectIdentifier id="idAprCellValDash10"
+                                    title="{ApprovedBy}"
+                                    text="{ApprovedByPernr}"
+                                />
+
+                                <ObjectIdentifier id="idAprCellValDash11"
+                                    title="{AuthorizedBy}"
+                                    text="{AuthorizedByPernr}"
+                                />
+                                <ObjectStatus id="idAprCellValDash12"
+                                    text="{
+                                        path:'Status',
+                                        formatter: '.formatter.formatStatusText'
+                                    }"
+                                    class="statusBoldText"
+                                    state="{
+                                        path:'Status',
+                                        formatter: '.formatter.formatStatusState'
+                                    }"
+                                />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

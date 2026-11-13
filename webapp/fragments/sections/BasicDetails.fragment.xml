@@ -1,0 +1,63 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+
+    <VBox id="idAprBsDtVbox" class="sapUiSmallMargin">
+
+        <f:SimpleForm
+            id="idBasicDetailForm"
+            editable="true"
+            layout="ColumnLayout"
+            columnsXL="2"
+            columnsL="2"
+            columnsM="2"
+            singleContainerFullSize="true">
+
+            <f:content>
+
+                <core:Title id="idAprSmfBsTitle" text="" />
+
+                <Label id="idAprSmfBsLbl1" text="{i18n>companyIdLabel}" />
+                <Input id="idAprSmfBsInp1"
+                    value="{viewModel>/Header/CompanyId}"
+                    editable="false" />
+
+                <Label id="idAprSmfBsLbl2" text="{i18n>divisionLabel}" />
+                <Input id="idAprSmfBsInp2"
+                    value="{viewModel>/Header/DivisionDesc}"
+                    editable="false" />
+
+                <Label id="idAprSmfBsLbl3" text="{i18n>financialYear}" />
+                <Input id="idAprSmfBsInp3"
+                    value="{viewModel>/Header/Fyear}"
+                    editable="false" />
+
+                <Label id="idAprSmfBsLbl4" text="{i18n>period}" />
+                <Input id="idAprSmfBsInp4"
+                    value="{viewModel>/Header/Period}"
+                    editable="false" />
+
+                <Label id="idAprSmfBsLbl5" text="{i18n>dateFromLabel}" />
+                <Input id="idAprSmfBsInp5"
+                    value="{
+                        path:'viewModel>/Header/DateFrom',
+                        formatter:'.formatter.formatDate'
+                    }"
+                    editable="false" />
+
+                <Label id="idAprSmfBsLbl6" text="{i18n>dateToLabel}" />
+                <Input id="idAprSmfBsInp6"
+                    value="{
+                        path:'viewModel>/Header/DateTo',
+                        formatter:'.formatter.formatDate'
+                    }"
+                    editable="false" />
+
+            </f:content>
+
+        </f:SimpleForm>
+
+    </VBox>
+
+</core:FragmentDefinition>

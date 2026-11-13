@@ -1,0 +1,240 @@
+<mvc:View
+    controllerName="com.nhpc.zhrcomprptapprs1.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+
+    <Page
+        id="idPageDetail"
+        showHeader="false">
+
+        <content>
+            <uxap:ObjectPageLayout
+                id="ObjectPageLayout"
+                upperCaseAnchorBar="false">
+
+                <!-- HEADER -->
+                <uxap:headerTitle>
+                    <uxap:ObjectPageDynamicHeaderTitle id="idAprObjHdtTitle">
+
+                        <!-- Expanded Header -->
+                        <uxap:expandedHeading>
+                            <HBox id="idAprObjHdrEHdr"
+                                fitContainer="true"
+                                alignItems="Center">
+
+                                <Avatar id="idAprObjHdrEHdrAvatar"
+                                    src="sap-icon://document-text"
+                                    class="sapUiTinyMarginEnd"
+                                    displaySize="S"
+                                    displayShape="Square" />
+
+                                <VBox id="idAprObjHdrEHdrHBox" class="sapUiTinyMarginBegin">
+
+                                    <!-- Create Mode -->
+                                    <Title id="idAprObjHdrEHdrt1"
+                                        text="{i18n>detailCreatePageHeader}"
+                                        visible="{= ${viewModel>/mode} === 'Create' }"
+                                        wrapping="true" />
+
+                                    <!-- Display Mode -->
+                                    <Title id="idAprObjHdrEHdrt2"
+                                        text="{i18n>ObjectPageTitle} - {viewModel>/Header/ReportId}"
+                                        visible="{= ${viewModel>/mode} === 'Display' }"
+                                        wrapping="true" />
+
+                                    <ObjectStatus id="idAprObjHdrEHdrStatus"
+                                        title="{i18n>HeaderStatusText}"
+                                        text="{
+                                            path:'viewModel>/Header/Status',
+                                            formatter:'.formatter.formatStatusText'
+                                        }"
+                                        class="sapMObjectStatusMedium statusBoldText"
+                                        state="{
+                                            path:'viewModel>/Header/Status',
+                                            formatter:'.formatter.formatStatusState'
+                                        }" />
+
+                                </VBox>
+                            </HBox>
+                        </uxap:expandedHeading>
+
+                        <!-- Snapped Header -->
+                        <uxap:snappedHeading>
+                            <HBox id="idAprObjHdrSHdrHBox"
+                                fitContainer="true"
+                                alignItems="Center">
+
+                                <Avatar id="idAprObjHdrSHdrHBoxAvatar"
+                                    src="sap-icon://document-text"
+                                    class="sapUiTinyMarginEnd"
+                                    displayShape="Square" />
+
+                                <VBox id="idAprObjHdrSHdrHBoxHb" class="sapUiTinyMarginBegin">
+
+                                    <!-- Create Mode -->
+                                    <Title id="idAprObjHdrSHdrHBoxt1"
+                                        text="{i18n>detailCreatePageHeader}"
+                                        visible="{= ${viewModel>/mode} === 'Create' }"
+                                        wrapping="true" />
+
+                                    <!-- Display Mode -->
+                                    <Title id="idAprObjHdrSHdrHBoxT2"
+                                        text="{i18n>ObjectPageTitle} - {viewModel>/Header/ReportId}"
+                                        visible="{= ${viewModel>/mode} === 'Display' }"
+                                        wrapping="true" />
+
+                                    <ObjectStatus id="idAprObjHdrSHdrHBoxST"
+                                        title="{i18n>HeaderStatusText}"
+                                        text="{
+                                            path:'viewModel>/Header/Status',
+                                            formatter:'.formatter.formatStatusText'
+                                        }"
+                                        class="sapMObjectStatusMedium statusBoldText"
+                                        state="{
+                                            path:'viewModel>/Header/Status',
+                                            formatter:'.formatter.formatStatusState'
+                                        }" />
+
+                                </VBox>
+                            </HBox>
+                        </uxap:snappedHeading>
+
+                    </uxap:ObjectPageDynamicHeaderTitle>
+                </uxap:headerTitle>
+
+                <!-- SECTIONS -->
+                <uxap:sections>
+
+                    <!-- Employee DETAILS -->
+                    <uxap:ObjectPageSection id="idAprObjSecEmp"
+                        titleUppercase="false"
+                        title="{i18n>employeeDetails}">
+
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="idAprSubObjSecEmp">
+                                <uxap:blocks>
+                                    <VBox id="idAprObjSecEmpVBox">
+                                        <core:Fragment
+                                            fragmentName="com.nhpc.zhrcomprptapprs1.fragments.sections.EmployeeDetails"
+                                            type="XML" />
+                                    </VBox>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+
+                    </uxap:ObjectPageSection>
+                    <!-- BASIC DETAILS -->
+                    <uxap:ObjectPageSection id="idAprObjSecBasic"
+                        titleUppercase="false"
+                        title="{i18n>basicDetails}">
+
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="idAprObjubSecBasic" >
+                                <uxap:blocks>
+                                    <VBox id="idAprObjSubSecBasic">
+                                        <core:Fragment
+                                            fragmentName="com.nhpc.zhrcomprptapprs1.fragments.sections.BasicDetails"
+                                            type="XML" />
+                                    </VBox>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+
+                    </uxap:ObjectPageSection>
+
+                    <!-- COMPLIANCE DETAILS -->
+                    <uxap:ObjectPageSection id="idAprObjSecCompliance"
+                        titleUppercase="false"
+                        title="{i18n>complainanceDetails}">
+
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="idAprObjSubSecCompliance">
+                                <uxap:blocks>
+                                    <VBox id="idAprObjSecComplianceVb" >
+                                        <core:Fragment
+                                            fragmentName="com.nhpc.zhrcomprptapprs1.fragments.sections.ComplianceDetails"
+                                            type="XML" />
+                                    </VBox>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+
+                    </uxap:ObjectPageSection>
+
+                    <!-- History With Remarks Section -->
+                    <uxap:ObjectPageSection id="idAprObjSecRemark"
+                        titleUppercase="false"
+                        title="{i18n>HistoryWithRemarks}">
+
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="idAprObjSubSecRemark" visible="{= ${viewModel>/Header/Status} !== 'W'
+                                    &amp;&amp; ${viewModel>/Header/Status} !== 'S' }"
+                                >
+                                <uxap:blocks>
+                                    <VBox id="idAprObjSecRemarkVB">
+                                        <core:Fragment
+                                            fragmentName="com.nhpc.zhrcomprptapprs1.fragments.sections.Remarks"
+                                            type="XML" />
+                                    </VBox>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+
+                    </uxap:ObjectPageSection>
+
+                </uxap:sections>
+
+            </uxap:ObjectPageLayout>
+        </content>
+
+        <!-- FOOTER -->
+        <footer>
+            <OverflowToolbar id="idAprTlbFooter" >
+
+                <ToolbarSpacer id="idAprTlbSpcrFooter" />
+
+                <Button
+                    id="idRecommendBtn"
+                    text="{i18n>RecommendBtnText}"
+                    icon="sap-icon://accept"
+                    type="Success"
+                    press="onActionBtnPress"
+                    visible="{= ${viewModel>/Header/Status} === 'U' }" />
+                <Button
+                    id="idAuthorizeBtn"
+                    text="{i18n>AuthorizeBtnText}"
+                    icon="sap-icon://accept"
+                    type="Success"
+                    press="onActionBtnPress"
+                    visible="{= ${viewModel>/Header/Status} === 'A' }" />
+                <Button
+                    id="idApproveBtn"
+                    text="{i18n>ApproveBtnText}"
+                    icon="sap-icon://accept"
+                    type="Success"
+                    press="onActionBtnPress"
+                    visible="{= ${viewModel>/Header/Status} === 'N' }" />
+
+                <Button
+                    id="idReturnBtn"
+                    text="{i18n>ReturnBtnText}"
+                    icon="sap-icon://undo"
+                    type="Reject"
+                    press="onActionBtnPress"
+                    visible="{= ${viewModel>/Header/Status} === 'U' || ${viewModel>/Header/Status} === 'N' }" />
+                <Button
+                    id="idRejectBtn"
+                    text="{i18n>RejectBtnText}"
+                    icon="sap-icon://undo"
+                    type="Reject"
+                    press="onActionBtnPress"
+                    visible="{= ${viewModel>/Header/Status} === 'A' }" />
+            </OverflowToolbar>
+        </footer>
+
+    </Page>
+
+</mvc:View>

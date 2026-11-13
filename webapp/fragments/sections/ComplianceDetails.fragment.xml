@@ -1,0 +1,102 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Table
+        id="idComplianceDetailsTables"
+        items="{
+            path:'viewModel>/complianceDetails',
+            sorter:{
+                path:'Counter',
+                descending:false
+            }
+        }"
+        growing="true"
+        updateFinished="onManageCompTableUpdateFinish">
+
+        <headerToolbar>
+            <OverflowToolbar id="idAprOverTlbarComp">
+                <content>
+                    <Title
+                        id="idCompTableTitles"
+                        text="{i18n>ManageCompTableTitle}"
+                        level="H2" />
+                </content>
+            </OverflowToolbar>
+        </headerToolbar>
+
+        <columns>
+
+            <Column id="idColHdrAprComp1" width="7rem">
+                <Text id="idColHdrTxtAprComp1" text="{i18n>sno}" />
+            </Column>
+
+            <Column id="idColHdrAprComp2" width="45%">
+                <Text id="idColHdrTxtAprComp2" text="{i18n>nameofact}" />
+            </Column>
+
+            <Column  id="idColHdrAprComp3" width="19%">
+                <Text id="idColHdrTxtAprComp3" text="{i18n>complianceStatus}" />
+            </Column>
+
+            <Column id="idColHdrAprComp4" width="29%">
+                <Text id="idColHdrTxtAprComp4" text="{i18n>remarks}" />
+            </Column>
+
+        </columns>
+
+        <items>
+
+            <ColumnListItem id="idAprCompCollstItm">
+
+                <cells>
+
+                    <Text id="idAPrCellCompVal1"
+                        text="{
+                            path:'viewModel>Counter',
+                            formatter:'.formatter.formatAmount'
+                        }" />
+
+                    <Text id="idAPrCellCompVal2"
+                        text="{viewModel>NameOfAct}" />
+
+                    <ComboBox id="idAPrCellCompVal3"
+                        selectedKey="{viewModel>ComplianceStatus}"
+                        selectionChange=".onComplianceStatusChange"
+                        editable="{viewModel>/editable}"
+                        valueState="{viewModel>ComplianceState}"
+                        valueStateText="{viewModel>ComplianceStateText}" 
+                        change="onComboBoxChange" >
+
+                        <core:Item id="idAPrCellCompVal3CmbItm1"
+                            key="Y"
+                            text="Compliance" />
+
+                        <core:Item id="idAPrCellCompVal3CmbItm2"
+                            key="N"
+                            text="Non-Compliance" />
+
+                        <core:Item id="idAPrCellCompVal3CmbItm3"
+                            key="NA"
+                            text="N.A." />
+
+                    </ComboBox>
+
+                    <Input id="idAPrCellCompVal4"
+                        value="{viewModel>Remarks}"
+                        required="{viewModel>RemarksRequired}"
+                        placeholder="Enter Remarks"
+                        editable="{= ${viewModel>/editable} &amp;&amp; ${viewModel>RemarksEditable} }"
+                        valueState="{viewModel>RemarksState}"
+                        valueStateText="{viewModel>RemarksStateText}" 
+                        liveChange="onRemarksLiveChange"  />
+
+                </cells>
+
+            </ColumnListItem>
+
+        </items>
+
+    </Table>
+
+</core:FragmentDefinition>

@@ -1,0 +1,36 @@
+
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<VBox id="idAPrEmpDetailVbox">
+		<f:SimpleForm id="idEmployeeDetailsSimpleForm" editable="true" layout="ResponsiveGridLayout"
+			columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true" binding="{viewModel>/EmployeeDetails}">
+			<f:content>
+				<core:Title id="idAprEmpDtltitle" text=""/>
+
+				<Label id="idAprEmpDetailLbl01" text="{i18n>EmployeeNameLabel}" />
+				<Input id="idAprInputEmp1" value="{viewModel>Ename}" editable="false" />
+
+				<Label id="idAprEmpDetailLbl02" text="{i18n>EmployeeIdLabel}" />
+				<!-- <Input value="{path:'viewModel>/PMSNonERPDetail/EMP_ID',formatter:'.formatter.formatPreccedingZero'}" editable="false" /> -->
+				<Input id="idAprInputEmp2" value="{viewModel>Pernr}" editable="false" />
+
+				<Label id="idAprEmpDetailLbl03" text="{i18n>EmployeeDesignationLabel}" />
+				<Input id="idAprInputEmp3" value="{viewModel>PositionText}" editable="false" />
+
+
+				<core:Title id="idAprEmpDtltitle2" text=""/>
+
+				<Label id="idAprEmpDetailLbl04" text="{i18n>EmployeeDepartmentLabel}" />
+				<Input id="idAprInputEmp4" value="{viewModel>Department}" editable="false" />
+
+                <Label id="idAprEmpDetailLbl05" text="{i18n>EmployeeLocationLabel}" />
+				<Input id="idAprInputEmp5" value="{viewModel>Location}" editable="false" />
+
+				<Label id="idAprEmpDetailLbl06" text="{i18n>EmployeeCategoryLabel}" />
+				<Input id="idAprInputEmp6" value="{viewModel>Category}" editable="false" />
+
+
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+</core:FragmentDefinition>

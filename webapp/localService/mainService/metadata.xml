@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZHR_COMPL_REP_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Header" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ReportId"/>
+                </Key>
+                <Property Name="ReportId" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Record Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyId" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Company ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Periodicity" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Periodicity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fyear" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Year" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Created By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ApprovedBy" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Approved By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Period" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Period" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DateFrom" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Date From" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DateTo" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Date To" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecommendedBy" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Recommended By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AuthorizedBy" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Authorized By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Location" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Location" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToItems" Relationship="ZHR_COMPL_REP_SRV.Header_Item" FromRole="FromRole_Header_Item" ToRole="ToRole_Header_Item"/>
+            </EntityType>
+            <EntityType Name="Item" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ReportId"/>
+                    <PropertyRef Name="SrNo"/>
+                    <PropertyRef Name="ApplLawNo"/>
+                </Key>
+                <Property Name="ReportId" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Record Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SrNo" Type="Edm.Decimal" Nullable="false" Precision="7" Scale="3" sap:unicode="false" sap:label="Sr.No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ApplLawNo" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Law Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Compliance" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Compliance Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Remarks" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Remarks" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToLaw" Relationship="ZHR_COMPL_REP_SRV.Item_Law" FromRole="ToRole_Item_Law" ToRole="FromRole_Item_Law"/>
+            </EntityType>
+            <EntityType Name="Law" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SrNo"/>
+                    <PropertyRef Name="ApplLawNo"/>
+                </Key>
+                <Property Name="SrNo" Type="Edm.Decimal" Nullable="false" Precision="7" Scale="3" sap:unicode="false" sap:label="Sr.No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ApplLawNo" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Law Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ActiveFrom" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Active From" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="250" sap:unicode="false" sap:label="Law Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ActiveTo" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Active To" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HdrYn" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Header Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="LawToItems" Relationship="ZHR_COMPL_REP_SRV.Item_Law" FromRole="FromRole_Item_Law" ToRole="ToRole_Item_Law"/>
+            </EntityType>
+            <EntityType Name="StatusVH" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Status"/>
+                </Key>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatusDesc" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="PeriodVH" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Period"/>
+                </Key>
+                <Property Name="Period" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="YearVH" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Year"/>
+                </Key>
+                <Property Name="Year" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="Header_Item" sap:content-version="1">
+                <End Type="ZHR_COMPL_REP_SRV.Header" Multiplicity="1" Role="FromRole_Header_Item"/>
+                <End Type="ZHR_COMPL_REP_SRV.Item" Multiplicity="*" Role="ToRole_Header_Item"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Header_Item">
+                        <PropertyRef Name="ReportId"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Header_Item">
+                        <PropertyRef Name="ReportId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Item_Law" sap:content-version="1">
+                <End Type="ZHR_COMPL_REP_SRV.Law" Multiplicity="1" Role="FromRole_Item_Law"/>
+                <End Type="ZHR_COMPL_REP_SRV.Item" Multiplicity="*" Role="ToRole_Item_Law"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Item_Law">
+                        <PropertyRef Name="SrNo"/>
+                        <PropertyRef Name="ApplLawNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Item_Law">
+                        <PropertyRef Name="SrNo"/>
+                        <PropertyRef Name="ApplLawNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZHR_COMPL_REP_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="HeaderSet" EntityType="ZHR_COMPL_REP_SRV.Header" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ApproveHeaderSet" EntityType="ZHR_COMPL_REP_SRV.Header" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ItemSet" EntityType="ZHR_COMPL_REP_SRV.Item" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="LawSet" EntityType="ZHR_COMPL_REP_SRV.Law" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="StatusVHSet" EntityType="ZHR_COMPL_REP_SRV.StatusVH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PeriodVHSet" EntityType="ZHR_COMPL_REP_SRV.PeriodVH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="YearVHSet" EntityType="ZHR_COMPL_REP_SRV.YearVH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="Header_ItemSet" Association="ZHR_COMPL_REP_SRV.Header_Item" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="HeaderSet" Role="FromRole_Header_Item"/>
+                    <End EntitySet="ItemSet" Role="ToRole_Header_Item"/>
+                </AssociationSet>
+                <AssociationSet Name="ApproveHeader_ItemSet" Association="ZHR_COMPL_REP_SRV.Header_Item" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ApproveHeaderSet" Role="FromRole_Header_Item"/>
+                    <End EntitySet="ItemSet" Role="ToRole_Header_Item"/>
+                </AssociationSet>
+                <AssociationSet Name="Item_LawSet" Association="ZHR_COMPL_REP_SRV.Item_Law" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="LawSet" Role="FromRole_Item_Law"/>
+                    <End EntitySet="ItemSet" Role="ToRole_Item_Law"/>
+                </AssociationSet>
+                <FunctionImport Name="ApproveReport" ReturnType="ZHR_COMPL_REP_SRV.Header" EntitySet="HeaderSet" m:HttpMethod="POST">
+                    <Parameter Name="ReportId" Type="Edm.String" Mode="In" MaxLength="20"/>
+                </FunctionImport>
+                <FunctionImport Name="CreateReport" ReturnType="ZHR_COMPL_REP_SRV.Header" EntitySet="HeaderSet" m:HttpMethod="POST"/>
+                <FunctionImport Name="Submit" ReturnType="ZHR_COMPL_REP_SRV.Header" EntitySet="HeaderSet" m:HttpMethod="POST">
+                    <Parameter Name="ReportId" Type="Edm.String" Mode="In" MaxLength="20"/>
+                </FunctionImport>
+                <FunctionImport Name="PreviewReport" ReturnType="ZHR_COMPL_REP_SRV.Header" EntitySet="HeaderSet" m:HttpMethod="GET"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/sap/ZHR_COMPL_REP_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/sap/ZHR_COMPL_REP_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

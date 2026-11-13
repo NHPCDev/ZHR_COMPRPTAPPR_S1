@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+>
+    <Dialog
+        id="idDecisionDialog"
+        title="Submit Decision"
+        type="Message"
+        titleAlignment="Center"
+        class="sapUiSizeCompact"
+        afterOpen="onDecisionDialogAfterOpen"
+    >
+        <content>
+            <VBox id="idDecDialogVbox">
+                <Text
+                    id="idActionText"
+                    class="sapUiSmallMarginBottom"
+                />
+                <Label
+                    id="idDecisionLabel"
+                    text="Decision Note:"
+                />
+                <TextArea
+                    id="idComments"
+                    rows="2"
+                    cols="30"
+                    maxLength="250"
+                    width="100%"
+                    liveChange="onCommentLiveChange"
+                />
+            </VBox>
+        </content>
+        <beginButton>
+            <Button
+                id="idSubmitDecisionBtn"
+                text="Submit"
+                type="Emphasized"
+                press="handleActionPerfomedConfirm"
+            />
+        </beginButton>
+        <endButton>
+            <Button id="idDialogCancelBtn"
+                text="Cancel"
+                press="handleActionPerfomedCancel"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
